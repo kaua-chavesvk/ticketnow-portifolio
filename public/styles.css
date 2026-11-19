@@ -741,7 +741,8 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .cart-footer .btn-checkout { margin-top: 20px; }
 .cat-btn, .btn-buy, .nav-cart { min-height: 44px; }
 #load-more { display: block; margin: 32px auto 0; }
-.toast { max-width: calc(100% - 32px); white-space: normal; width: max-content; pointer-events: none; }
+.toast { max-width: calc(100% - 32px); white-space: normal; width: max-content; pointer-events: none; opacity: 0; }
+.toast.show { opacity: 1; }
 @media (max-width: 600px) {
   .search-bar { flex-wrap: wrap; }
   .search-bar input { flex-basis: 100%; width: 100%; min-width: 0; }
