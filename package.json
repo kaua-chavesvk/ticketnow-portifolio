@@ -4,5 +4,5 @@
   "private": true,
   "type": "module",
   "engines": { "node": ">=22" },
-  "scripts": { "start": "node --env-file-if-exists=.env server.js", "test": "node --test", "check": "node --check server.js && node --check public/app.js && node --check public/model.js" }
+  "scripts": { "start": "node --env-file-if-exists=.env server.js", "build": "node scripts/build.mjs", "test": "node --test", "check": "node --check server.js && node --check api/events.js && node --check scripts/build.mjs && node --check public/app.js && node --check public/model.js" }
 }

@@ -6,14 +6,14 @@ import { categories, normalizeEvent, getDemoEvents, filterEvents } from './publi
 const ROOT = new URL('./', import.meta.url);
 const files = new Map([['/', ['index.html', 'text/html; charset=utf-8']], ['/index.html', ['index.html', 'text/html; charset=utf-8']], ['/public/styles.css', ['public/styles.css', 'text/css; charset=utf-8']], ['/public/app.js', ['public/app.js', 'text/javascript; charset=utf-8']], ['/public/model.js', ['public/model.js', 'text/javascript; charset=utf-8']]]);
 const CSP = "default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://s1.ticketm.net https://s2.ticketm.net https://s3.ticketm.net https://s4.ticketm.net; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'";
-export function createApp({ apiKey = process.env.TICKETMASTER_API_KEY || '', fetchImpl = fetch, now = Date.now, perClientLimit = 30, globalLimit = 200 } = {}) {
+export function createHandler({ apiKey = process.env.TICKETMASTER_API_KEY || '', fetchImpl = fetch, now = Date.now, perClientLimit = 30, globalLimit = 200 } = {}) {
   const cache = new Map(), clients = new Map(), pending = new Map();
   let globalWindow = { at: now(), count: 0 };
   function send(req, res, status, body, type = 'application/json; charset=utf-8') {
     res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer', 'Content-Security-Policy': CSP, 'X-Frame-Options': 'DENY', 'Permissions-Policy': 'camera=(), microphone=(), geolocation=()' });
     res.end(req.method === 'HEAD' ? undefined : typeof body === 'string' || Buffer.isBuffer(body) ? body : JSON.stringify(body));
   }
-  const server = createServer(async (req, res) => {
+  return async (req, res) => {
     try {
       const url = new URL(req.url, 'http://localhost');
       if (!['GET', 'HEAD'].includes(req.method)) { res.setHeader('Allow', 'GET, HEAD'); return send(req, res, 405, { error: 'Método não permitido.' }); }
@@ -74,7 +74,11 @@ export function createApp({ apiKey = process.env.TICKETMASTER_API_KEY || '', fet
       // Never expose upstream URLs, keys or provider error bodies to clients/logs.
       return send(req, res, 502, { error: 'Catálogo temporariamente indisponível.' });
     }
-  });
+  };
+}
+
+export function createApp(options) {
+  const server = createServer(createHandler(options));
   server.requestTimeout = 10000; server.headersTimeout = 10000; server.keepAliveTimeout = 5000; server.maxRequestsPerSocket = 100;
   return server;
 }
