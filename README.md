@@ -4,6 +4,42 @@ Catálogo de eventos e carrinho demonstrativo de ingressos, desenvolvido por Kau
 
 > **Projeto de portfólio. Não vende, reserva, cobra ou emite ingressos. Não solicita cartão, CPF, telefone ou e-mail.**
 
+[Abrir demonstração](https://kaua-chavesvk.github.io/ticketnow-portifolio/) · [Roteiro de apresentação](docs/apresentacao.md) · [Testes e publicações](https://github.com/kaua-chavesvk/ticketnow-portifolio/actions)
+
+## Prévia
+
+![TicketNow no computador: catálogo demonstrativo com busca, categorias e carrinho](docs/images/ticketnow-desktop.png)
+
+<details>
+<summary>Ver versão para celular</summary>
+
+<img src="docs/images/ticketnow-mobile.png" alt="TicketNow no celular: busca adaptada à tela e eventos em uma coluna" width="320">
+
+</details>
+
+As capturas mostram o modo demonstrativo. No GitHub Pages, os eventos são fictícios e identificados como exemplos; a integração com a Ticketmaster exige executar o servidor com uma chave privada.
+
+## O que este projeto demonstra
+
+- Interface responsiva em português, com busca por evento/local e filtros de categoria.
+- Manipulação segura de conteúdo externo por DOM e `textContent`.
+- Carrinho simulado com limite de quantidade e cálculo em centavos.
+- Diálogos acessíveis por teclado, tratamento de resultados vazios e falhas de carregamento.
+- Integração opcional com API externa por um servidor Node.js, com validação, limites, cache e testes.
+
+## Estrutura
+
+```text
+index.html             Estrutura semântica e política CSP
+public/styles.css      Identidade visual e responsividade
+public/app.js          Busca, renderização e interações
+public/model.js        Regras de eventos, URLs, filtros e carrinho
+server.js              Arquivos públicos e API opcional
+test/                  Testes de regras e servidor
+docs/                  Roteiro e capturas de demonstração
+.github/workflows/     Verificações automáticas
+```
+
 ## Executar
 
 Requer Node.js 22 ou superior. Não há dependências externas de execução nem etapa de build.
