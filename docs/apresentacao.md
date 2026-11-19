@@ -1,6 +1,6 @@
 # Como apresentar o TicketNow
 
-[Abrir o projeto](https://kaua-chavesvk.github.io/ticketnow-portifolio/) · [Voltar ao README](../README.md)
+[Abrir o projeto com API](https://ticketnow-lilac.vercel.app/) · [Versão estática](https://kaua-chavesvk.github.io/ticketnow-portifolio/) · [Voltar ao README](../README.md)
 
 ## Roteiro de três minutos
 
@@ -8,7 +8,7 @@
 
 “O TicketNow é um projeto de portfólio para explorar eventos e experimentar um carrinho de ingressos. A demonstração pública usa dados fictícios identificados. Ela não realiza pagamentos nem emite ingressos.”
 
-Mostre a página inicial e o aviso de demonstração. Explique que o catálogo real depende de um servidor e de uma chave privada da Ticketmaster.
+Mostre a página inicial e o aviso de demonstração. Explique que o servidor já está publicado na Vercel e que o catálogo real depende de cadastrar uma nova chave privada da Ticketmaster.
 
 ### 2. Uso — um minuto
 
@@ -29,7 +29,7 @@ Mostre a página inicial e o aviso de demonstração. Explique que o catálogo r
 
 ### 4. Próxima evolução — 30 segundos
 
-“A próxima etapa é publicar o servidor com uma nova chave privada. Depois, pretendo implementar usuários e favoritos persistidos, com autorização testada. Pagamentos reais exigiriam outra integração e não fazem parte da demonstração atual.”
+“O servidor já está publicado. A próxima etapa é cadastrar uma nova chave privada para o catálogo real. Depois, pretendo implementar usuários e favoritos persistidos, com autorização testada. Pagamentos reais exigiriam outra integração e não fazem parte da demonstração atual.”
 
 Essa é uma proposta de evolução, não uma funcionalidade já entregue.
 

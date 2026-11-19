@@ -4,7 +4,9 @@ Catálogo de eventos e carrinho demonstrativo de ingressos, desenvolvido por Kau
 
 > **Projeto de portfólio. Não vende, reserva, cobra ou emite ingressos. Não solicita cartão, CPF, telefone ou e-mail.**
 
-[Abrir demonstração](https://kaua-chavesvk.github.io/ticketnow-portifolio/) · [Roteiro de apresentação](docs/apresentacao.md) · [Testes e publicações](https://github.com/kaua-chavesvk/ticketnow-portifolio/actions)
+[Abrir aplicação com back-end](https://ticketnow-lilac.vercel.app/) · [Versão estática no GitHub Pages](https://kaua-chavesvk.github.io/ticketnow-portifolio/) · [Roteiro de apresentação](docs/apresentacao.md) · [Testes](https://github.com/kaua-chavesvk/ticketnow-portifolio/actions)
+
+**Publicação:** a aplicação e a API estão hospedadas na Vercel. Sem `TICKETMASTER_API_KEY`, o servidor responde com o catálogo demonstrativo. Veja [como cadastrar a nova chave e republicar](docs/publicacao.md). O catálogo real ainda depende dessa configuração; não há uma chave válida embutida no projeto.
 
 ## Prévia
 
@@ -35,6 +37,9 @@ public/styles.css      Identidade visual e responsividade
 public/app.js          Busca, renderização e interações
 public/model.js        Regras de eventos, URLs, filtros e carrinho
 server.js              Arquivos públicos e API opcional
+api/events.js          Entrada da API na Vercel
+scripts/build.mjs       Gera somente os arquivos públicos em dist/
+vercel.json            Configuração de publicação e cabeçalhos
 test/                  Testes de regras e servidor
 docs/                  Roteiro e capturas de demonstração
 .github/workflows/     Verificações automáticas
@@ -70,7 +75,8 @@ A API aceita `keyword` (até 100 caracteres), `category` (categorias conhecidas)
 ## Hospedagem
 
 - **GitHub Pages:** publique a raiz do repositório. Os caminhos são relativos e suportam `/ticketnow-portifolio/`. Como Pages hospeda conteúdo estático e não executa Node.js, o site usa o catálogo demonstrativo quando `/api/events` não existe. Não coloque a chave em um arquivo público para tentar ativar a API.
-- **Servidor Node.js:** hospede a raiz com `npm start`, configure `PORT`, `HOST=0.0.0.0` e a chave no painel privado da plataforma. Use HTTPS no proxy da hospedagem. O servidor só entrega o HTML e os três assets explicitamente permitidos; `.env`, `.git`, testes e código do servidor não são servidos.
+- **Vercel:** [ticketnow-lilac.vercel.app](https://ticketnow-lilac.vercel.app/). A função `/api/events` usa o mesmo handler testado pelo servidor local. `npm run build` gera `dist/` com apenas o HTML e três assets; a função fica no ambiente Node.js, fora da saída pública. Consulte [configuração, atualização e limites](docs/publicacao.md).
+- **Servidor Node.js tradicional:** hospede a raiz com `npm start`, configure `PORT`, `HOST=0.0.0.0` e a chave no painel privado da plataforma. Use HTTPS no proxy da hospedagem. O servidor só entrega o HTML e os três assets explicitamente permitidos; `.env`, `.git`, testes e código do servidor não são servidos.
 - A política CSP no HTML funciona na hospedagem estática. As proteções de cabeçalhos (incluindo bloqueio de iframe) são enviadas pelo servidor Node; o GitHub Pages não aplica os cabeçalhos personalizados deste servidor.
 
 ## Proteções e limites
